@@ -28,25 +28,24 @@ public class EmailService {
         try {
             String payload = String.format("""
             {
-                "from": "%s",
-                "to": ["%s"],
+                "sender": {"email": "%s", "name": "TechNext CRM"},
+                "to": [{"email": "%s"}],
                 "subject": "%s",
-                "html": %s
+                "htmlContent": %s
             }
             """, fromEmail, to, subject,
-                    com.fasterxml.jackson.databind.json.JsonMapper.builder().build()
-                            .writeValueAsString(wrapTemplate(htmlBody)));
+                    objectMapper.writeValueAsString(wrapTemplate(htmlBody)));
 
-            java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();
-            java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()
-                    .uri(java.net.URI.create("https://api.resend.com/emails"))
-                    .header("Authorization", "Bearer " + resendApiKey)
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("https://api.brevo.com/v3/smtp/email"))
+                    .header("api-key", resendApiKey)
                     .header("Content-Type", "application/json")
-                    .POST(java.net.http.HttpRequest.BodyPublishers.ofString(payload))
+                    .POST(HttpRequest.BodyPublishers.ofString(payload))
                     .build();
 
-            java.net.http.HttpResponse<String> response =
-                    client.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> response =
+                    client.send(request, HttpResponse.BodyHandlers.ofString());
 
             System.out.println("✅ Email sent to: " + to + " | Status: " + response.statusCode());
         } catch (Exception e) {
