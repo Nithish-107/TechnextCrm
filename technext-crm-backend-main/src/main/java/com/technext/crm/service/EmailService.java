@@ -22,6 +22,7 @@ public class EmailService {
     @Value("${resend.api.key}")
     private String resendApiKey;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
     // ✅ Generic send email
     @Async
     public void sendEmail(String to, String subject, String htmlBody) {
