@@ -3,8 +3,8 @@ import axios from "axios";
 import { Client } from "@stomp/stompjs";
 import SockJS from "sockjs-client/dist/sockjs";
 
-const BASE_URL = "http://localhost:8080/api";
-const WS_URL = "http://localhost:8080/ws";
+const BASE_URL = "https://technextcrm.onrender.com/api";
+const WS_URL = "https://technextcrm.onrender.com/ws";
 
 const CHANNELS = [
   {

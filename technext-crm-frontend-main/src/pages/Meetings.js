@@ -3,7 +3,7 @@ import axios from "axios";
 import Pagination, { usePagination } from "../components/Pagination";
 import EmailComposer from "../components/EmailComposer";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://technextcrm.onrender.com/api";
 
 export default function Meetings() {
   const [meetings, setMeetings] = useState([]);

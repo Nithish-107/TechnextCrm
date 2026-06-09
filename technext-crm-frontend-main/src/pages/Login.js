@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import logo from "../logo.jpg";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://technextcrm.onrender.com/api";
 
 export default function Login({ onLogin }) {
   const [tab, setTab] = useState("login");

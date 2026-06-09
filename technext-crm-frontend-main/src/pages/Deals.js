@@ -20,7 +20,7 @@ const exportToExcel = (data, filename) => {
   );
 };
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://technextcrm.onrender.com/api";
 
 function Deals() {
   const [deals, setDeals] = useState([]);

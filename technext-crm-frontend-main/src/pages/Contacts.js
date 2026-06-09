@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Pagination, { usePagination } from "../components/Pagination";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://technextcrm.onrender.com/api";
 
 export default function Contacts() {
   const [items, setItems] = useState([]);

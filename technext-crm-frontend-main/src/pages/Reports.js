@@ -3,7 +3,7 @@ import axios from "axios";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://technextcrm.onrender.com/api";
 const MONTHS = [
   "January",
   "February",

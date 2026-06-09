@@ -4,7 +4,7 @@ import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import Pagination, { usePagination } from "../components/Pagination";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://technextcrm.onrender.com/api";
 
 export default function Placements() {
   const [placements, setPlacements] = useState([]);

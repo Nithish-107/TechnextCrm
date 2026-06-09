@@ -18,7 +18,7 @@ import {
   Legend,
 } from "recharts";
 
-const BASE_URL = "http://localhost:8080/api";
+const BASE_URL = "https://technextcrm.onrender.com/api";
 
 export default function Dashboard({ user, onNavigate }) {
   const [leads, setLeads] = useState([]);
