@@ -26,7 +26,7 @@ public class EmailController {
             );
             return ResponseEntity.ok(Map.of("success", true, "message", "Email sent!"));
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(Map.of("success", false, "message", e.getMessage()));
+            return ResponseEntity.status(500).body(Map.of("success", false, "message", e.getMessage(),"error", e.getClass().getName()));
         }
     }
 
