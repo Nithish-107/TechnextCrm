@@ -2,3 +2,4 @@
 **/node_modules/
 **/target/
 .env
+technext-crm-backend-main/src/main/resources/application.properties
