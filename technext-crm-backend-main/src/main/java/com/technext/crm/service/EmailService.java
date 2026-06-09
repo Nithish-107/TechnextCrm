@@ -11,27 +11,42 @@ import jakarta.mail.internet.MimeMessage;
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
-
     @Value("${technext.mail.from}")
     private String fromEmail;
 
     @Value("${technext.mail.company}")
     private String companyName;
 
+    @Value("${resend.api.key}")
+    private String resendApiKey;
+
     // ✅ Generic send email
     @Async
     public void sendEmail(String to, String subject, String htmlBody) {
         try {
-            MimeMessage message = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-            helper.setFrom(fromEmail);
-            helper.setTo(to);
-            helper.setSubject(subject);
-            helper.setText(wrapTemplate(htmlBody), true);
-            mailSender.send(message);
-            System.out.println("✅ Email sent to: " + to);
+            String payload = String.format("""
+            {
+                "from": "%s",
+                "to": ["%s"],
+                "subject": "%s",
+                "html": %s
+            }
+            """, fromEmail, to, subject,
+                    com.fasterxml.jackson.databind.json.JsonMapper.builder().build()
+                            .writeValueAsString(wrapTemplate(htmlBody)));
+
+            java.net.http.HttpClient client = java.net.http.HttpClient.newHttpClient();
+            java.net.http.HttpRequest request = java.net.http.HttpRequest.newBuilder()
+                    .uri(java.net.URI.create("https://api.resend.com/emails"))
+                    .header("Authorization", "Bearer " + resendApiKey)
+                    .header("Content-Type", "application/json")
+                    .POST(java.net.http.HttpRequest.BodyPublishers.ofString(payload))
+                    .build();
+
+            java.net.http.HttpResponse<String> response =
+                    client.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());
+
+            System.out.println("✅ Email sent to: " + to + " | Status: " + response.statusCode());
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("❌ Email failed to " + to + ": " + e.getMessage());
