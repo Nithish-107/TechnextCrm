@@ -21,7 +21,7 @@ public class TaskService {
         return taskRepository.findById(id);
     }
 
-    public List<Task> getTasksByAssignedTo(Integer assignedTo) {
+    public List<Task> getTasksByAssignedTo(String assignedTo) {
         return taskRepository.findByAssignedTo(assignedTo);
     }
 

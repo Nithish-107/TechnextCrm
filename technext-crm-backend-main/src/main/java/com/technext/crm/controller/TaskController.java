@@ -26,7 +26,7 @@ public class TaskController {
     }
 
     @GetMapping("/assigned/{assignedTo}")
-    public List<Task> getTasksByAssignedTo(@PathVariable Integer assignedTo) {
+    public List<Task> getTasksByAssignedTo(@PathVariable String assignedTo) {
         return taskService.getTasksByAssignedTo(assignedTo);
     }
 

@@ -23,7 +23,7 @@ public class Task {
     private String status;
 
     @Column(name = "assigned_to")
-    private Integer assignedTo;
+    private String assignedTo;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
